@@ -5,13 +5,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     Rigidbody rigid; //Rigidbodyを入れる変数
-<<<<<<< HEAD
     float speedx; //移動スピードを入れる変数
     //float MaxWalkSpeed=2; //移動スピードの上限値
-=======
     float speedz; //移動スピードを入れる変数
     float MaxWalkSpeed=2; //移動スピードの上限値
->>>>>>> 970a5bdca8a72313e78c72ed6a499d2e054f7608
     float JumpForce = 880.0f; //ジャンプ時にかかる力
     int JumpMax; //一度にジャンプできる回数上限
     int JumpCount; //ジャンプした回数の変数
@@ -20,29 +17,22 @@ public class PlayerController : MonoBehaviour {
     //falseが未所持、trueが所持
     public bool[] StarFrag;
 
-<<<<<<< HEAD
-    public Vector3 localGravity;
-=======
     public Vector3 localGravity; //重力を入れる変数
 
     GameObject CanePivot; //杖のpivotを入れる変数
     Animator animator; //Animatorの情報を入れる変数
     public GameObject Muzzle; //魔法用のMuzzleを入れる変数
->>>>>>> 970a5bdca8a72313e78c72ed6a499d2e054f7608
-
     // Use this for initialization
     void Start () {
         //アタッチしたオブジェクトのRigidbodyを取得する
         this.rigid = GetComponent<Rigidbody>();
 
         JumpMax = 1; //ジャンプできる回数の初期化
-<<<<<<< HEAD
-=======
+
 
         CanePivot = GameObject.Find("CanePivot");
         animator = CanePivot.GetComponent<Animator>();
 
->>>>>>> 970a5bdca8a72313e78c72ed6a499d2e054f7608
     }
 	
 	// Update is called once per frame
@@ -59,7 +49,7 @@ public class PlayerController : MonoBehaviour {
             JumpMax = 2;
         }
         //ジャンプする
-        if (Input.GetKeyDown(KeyCode.Space) && JumpCount <= JumpMax)  
+        if (Input.GetKeyDown(KeyCode.LeftShift) && JumpCount <= JumpMax)  
         {
             this.rigid.velocity = new Vector3(this.rigid.velocity.x, 0.01f, this.rigid.velocity.z);
             this.rigid.AddForce(transform.up * this.JumpForce);
@@ -91,8 +81,6 @@ public class PlayerController : MonoBehaviour {
         //移動処理
         transform.Translate(0, 0, speedz);
     }
-<<<<<<< HEAD
-=======
 
     void Attack()
     {
@@ -115,7 +103,6 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
->>>>>>> 970a5bdca8a72313e78c72ed6a499d2e054f7608
     void setLocalGravity()
     {
         //重力を変える
