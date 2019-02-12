@@ -6,7 +6,7 @@ using UnityEngine.Animations;
 public class PlayerController : MonoBehaviour {
 
     Rigidbody rigid; //Rigidbodyを入れる変数
-    float speedx; //移動スピードを入れる変数
+    float speedz; //移動スピードを入れる変数
     float MaxWalkSpeed=2; //移動スピードの上限値
     float JumpForce = 880.0f; //ジャンプ時にかかる力
     int JumpMax; //一度にジャンプできる回数上限
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 
     GameObject CanePivot; //杖のpivotを入れる変数
     Animator animator; //Animatorの情報を入れる変数
-    GameObject Muzzle; //魔法用のMuzzleを入れる変数
+    public GameObject Muzzle; //魔法用のMuzzleを入れる変数
 
     // Use this for initialization
     void Start () {
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour {
 
         CanePivot = GameObject.Find("CanePivot");
         animator = CanePivot.GetComponent<Animator>();
+
     }
 	
 	// Update is called once per frame
@@ -61,24 +62,24 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Wを押してスピードが0.5以下の時前進
-        if (Input.GetKey(KeyCode.RightArrow) && speedx < 0.1f)
+        if (Input.GetKey(KeyCode.RightArrow) && speedz < 0.1f)
         {
-            speedx += 0.01f;
+            speedz += 0.01f;
         }
         //Sを押してスピードが-0.5以上の時後退
-        else if (Input.GetKey(KeyCode.LeftArrow) && speedx > -0.1f)
+        else if (Input.GetKey(KeyCode.LeftArrow) && speedz > -0.1f)
         {
-            speedx -= 0.01f;
+            speedz -= 0.01f;
         }
 
         //ボタンを離したとき、またはSとWを同時に押すと停止
         if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow)) 
         {
-            speedx = 0;
+            speedz = 0;
         }
 
         //移動処理
-        transform.Translate(speedx, 0, 0);
+        transform.Translate(0, 0, speedz);
     }
 
     void Attack()
@@ -90,7 +91,15 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            animator.SetTrigger("MagicTrigger");
+            Muzzle.GetComponent<MuzzleController>().Magic();
+        }
+        if (Input.GetKey(KeyCode.X))
+        {
+            Muzzle.GetComponent<MuzzleController>().MagicCharge();
+        }
+        if (Input.GetKeyUp(KeyCode.X)) 
+        {
+            Muzzle.GetComponent<MuzzleController>().MagicFire();
         }
 
     }
