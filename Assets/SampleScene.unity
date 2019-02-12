@@ -435,6 +435,11 @@ Prefab:
       propertyPath: Muzzle
       value: 
       objectReference: {fileID: 2017046592}
+    - target: {fileID: 114172624175811500, guid: fd0f6413eb340f343b9b90d2afce9562,
+        type: 2}
+      propertyPath: StarFrag.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd0f6413eb340f343b9b90d2afce9562, type: 2}
   m_IsPrefabParent: 0

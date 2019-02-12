@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         move(); //移動
+        Attack(); //攻撃
         setLocalGravity(); //重力
 
     }
