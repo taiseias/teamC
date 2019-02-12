@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
 
     GameObject CanePivot; //杖のpivotを入れる変数
     Animator animator; //Animatorの情報を入れる変数
+    GameObject Muzzle; //魔法用のMuzzleを入れる変数
 
     // Use this for initialization
     void Start () {
@@ -85,6 +86,11 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Z) && !animator.GetCurrentAnimatorStateInfo(0).IsName("cane 3") && !animator.IsInTransition(0)) 
         {
             animator.SetTrigger("CaneTrigger");
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            animator.SetTrigger("MagicTrigger");
         }
 
     }
