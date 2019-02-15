@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
     public Vector3 localGravity; //重力を入れる変数
 
     GameObject CanePivot; //杖のpivotを入れる変数
-    Animator animator; //Animatorの情報を入れる変数
+    //Animator animator; //Animatorの情報を入れる変数
     public GameObject Muzzle; //魔法用のMuzzleを入れる変数
     // Use this for initialization
     void Start () {
@@ -34,13 +34,14 @@ public class PlayerController : MonoBehaviour {
 
 
         CanePivot = GameObject.Find("CanePivot");
-        animator = CanePivot.GetComponent<Animator>();
+        //animator = CanePivot.GetComponent<Animator>();
 
     }
 	
 	// Update is called once per frame
 	void Update () {
         move(); //移動
+        Attack(); //攻撃
         setLocalGravity(); //重力
 
     }
@@ -52,45 +53,48 @@ public class PlayerController : MonoBehaviour {
             JumpMax = 2;
         }
         //ジャンプする
-        if (Input.GetKeyDown(KeyCode.LeftShift) && JumpCount <= JumpMax)  
+        if (Input.GetKeyDown(KeyCode.LeftShift) && JumpCount <= JumpMax)
         {
             this.rigid.velocity = new Vector3(this.rigid.velocity.x, 0.01f, this.rigid.velocity.z);
             this.rigid.AddForce(transform.up * this.JumpForce);
             JumpCount++;
         }
         //上下に動いていないとき
-        if(this.rigid.velocity.y == 0)
+        if (this.rigid.velocity.y == 0)
         {
             JumpCount = 1;
         }
 
-        //Wを押してスピードが0.5以下の時前進
-        if (Input.GetKey(KeyCode.RightArrow) && speedz < 0.1f)
+        //Wを押すと前進
+        if (Input.GetKey(KeyCode.RightArrow) && speedz < 0.1f) 
         {
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
             speedz += 0.01f;
         }
-        //Sを押してスピードが-0.5以上の時後退
-        else if (Input.GetKey(KeyCode.LeftArrow) && speedz > -0.1f)
+        //Sを押すと後退
+        if (Input.GetKey(KeyCode.LeftArrow) && speedz < 0.1f) 
         {
-            speedz -= 0.01f;
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+            speedz += 0.01f;
         }
 
         //ボタンを離したとき、またはSとWを同時に押すと停止
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow)) 
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
         {
             speedz = 0;
         }
-
+        
         //移動処理
         transform.Translate(0, 0, speedz);
+        transform.position = new Vector3(0, transform.position.y, transform.position.z);
     }
 
     void Attack()
     {
-        if (Input.GetKeyDown(KeyCode.Z) && !animator.GetCurrentAnimatorStateInfo(0).IsName("cane 3") && !animator.IsInTransition(0)) 
-        {
-            animator.SetTrigger("CaneTrigger");
-        }
+        //if (Input.GetKeyDown(KeyCode.Z) && !animator.GetCurrentAnimatorStateInfo(0).IsName("cane 3") && !animator.IsInTransition(0)) 
+        //{
+        //    animator.SetTrigger("CaneTrigger");
+        //}
 
         if (Input.GetKeyDown(KeyCode.X))
         {

@@ -30,8 +30,11 @@ public class MuzzleController : MonoBehaviour {
     public void MagicCharge()
     {
         magic.transform.position = transform.position;
-        MagicScale += 0.02f;
-        magic.transform.localScale = new Vector3(MagicScale, MagicScale, MagicScale);
+        if (MagicScale <= 3)
+        {
+            MagicScale += 0.02f;
+            magic.transform.localScale = new Vector3(MagicScale, MagicScale, MagicScale);
+        }
     }
 
     //魔法の発射
