@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     //float MaxWalkSpeed=2; //移動スピードの上限値
     float speedz; //移動スピードを入れる変数
     float MaxWalkSpeed=2; //移動スピードの上限値
-    float JumpForce = 880.0f; //ジャンプ時にかかる力
+    float JumpForce = 880.0f; //ジャンプ時にかかる力a
     int JumpMax; //一度にジャンプできる回数上限
     int JumpCount; //ジャンプした回数の変数
 
